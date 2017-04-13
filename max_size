@@ -1,0 +1,343 @@
+examples/etsi_iot_01.c:    while ( nextpdu && nextpdu->t <= now ) {
+examples/etsi_iot_01.c:    if ( nextpdu && nextpdu->t <= now + COAP_RESOURCE_CHECK_TIME_SEC ) {
+examples/etsi_iot_01.c:      tv.tv_usec = ((nextpdu->t - now) % COAP_TICKS_PER_SECOND) * 1000000 / COAP_TICKS_PER_SECOND;
+examples/etsi_iot_01.c:      tv.tv_sec = (nextpdu->t - now) / COAP_TICKS_PER_SECOND;
+examples/coap-rd.c:    while ( nextpdu && nextpdu->t <= now ) {
+examples/coap-rd.c:    if ( nextpdu && nextpdu->t <= now + COAP_RESOURCE_CHECK_TIME ) {
+examples/coap-rd.c:      tv.tv_usec = ((nextpdu->t - now) % COAP_TICKS_PER_SECOND) * 1000000 / COAP_TICKS_PER_SECOND;
+examples/coap-rd.c:      tv.tv_sec = (nextpdu->t - now) / COAP_TICKS_PER_SECOND;
+examples/client.c:  pdu->hdr->type = msgtype;
+examples/client.c:  pdu->hdr->id = coap_new_message_id(ctx);
+examples/client.c:  pdu->hdr->code = m;
+examples/client.c:  pdu->hdr->token_length = the_token.length;
+examples/client.c:  if (pdu->hdr->type == COAP_MESSAGE_CON)
+examples/client.c:  } else if (pdu->hdr->type != COAP_MESSAGE_CON)
+examples/client.c:          if (pdu->hdr->type == COAP_MESSAGE_CON)
+examples/client.c:            if (pdu->hdr->type != COAP_MESSAGE_CON)
+examples/client.c:          if (pdu->hdr->type == COAP_MESSAGE_CON)
+examples/client.c:            if (pdu->hdr->type != COAP_MESSAGE_CON)
+examples/client.c:  if (pdu->hdr->type == COAP_MESSAGE_CON)
+examples/client.c:  if (pdu->hdr->type != COAP_MESSAGE_CON || tid == COAP_INVALID_TID)
+examples/client.c:    while (nextpdu && nextpdu->t <= now - ctx->sendqueue_basetime) {
+examples/client.c:    if (nextpdu && nextpdu->t < min(obs_wait ? obs_wait : max_wait, max_wait) - now) {
+examples/client.c:      tv.tv_usec = ((nextpdu->t) % COAP_TICKS_PER_SECOND) * 1000000 / COAP_TICKS_PER_SECOND;
+examples/client.c:      tv.tv_sec = (nextpdu->t) / COAP_TICKS_PER_SECOND;
+examples/coap-server.c:    while (nextpdu && nextpdu->t <= now - ctx->sendqueue_basetime) {
+examples/coap-server.c:    if ( nextpdu && nextpdu->t <= COAP_RESOURCE_CHECK_TIME ) {
+examples/coap-server.c:      tv.tv_usec = ((nextpdu->t) % COAP_TICKS_PER_SECOND) * 1000000 / COAP_TICKS_PER_SECOND;
+examples/coap-server.c:      tv.tv_sec = (nextpdu->t) / COAP_TICKS_PER_SECOND;
+examples/tiny.c:  pdu->hdr->type = COAP_MESSAGE_NON;
+examples/tiny.c:  pdu->hdr->code = COAP_REQUEST_POST;
+examples/tiny.c:  pdu->hdr->id = htons(id++);
+src/net.c:  coap_hash((const unsigned char *)&pdu->hdr->id, sizeof(unsigned short), h);
+src/net.c:      COAP_RESPONSE_CLASS(pdu->hdr->code) > 2) {
+src/net.c:				    (unsigned char *)pdu->hdr, pdu->length);
+src/net.c:  pbuf_realloc(pdu->pbuf, pdu->length);
+src/net.c:  udp_sendto(context->endpoint->pcb, pdu->pbuf,
+src/net.c:    etimer_set(&context->retransmit_timer, nextpdu->t);
+src/net.c:	  node->retransmit_cnt, ntohs(node->pdu->hdr->id));
+src/net.c:  if (node->pdu->hdr->code >= 64) {
+src/net.c:    token.length = node->pdu->hdr->token_length;
+src/net.c:    token.s = node->pdu->hdr->token;
+src/net.c:		     context->sendqueue->pdu->hdr->token, 
+src/net.c:		     context->sendqueue->pdu->hdr->token_length)) {
+src/net.c:    debug("**** removed transaction %d\n", ntohs(q->pdu->hdr->id));
+src/net.c:		    q->pdu->hdr->token, q->pdu->hdr->token_length)) {
+src/net.c:      debug("**** removed transaction %d\n", ntohs(q->pdu->hdr->id));
+src/net.c:  COAP_SET_STR(&token, sent->pdu->hdr->token_length, sent->pdu->hdr->token);
+src/net.c:      if (node->pdu->hdr->code == COAP_REQUEST_GET) { /* GET */
+src/net.c:  if ((size_t)node->pdu->hdr->code - 1 <
+src/net.c:    h = resource->handler[node->pdu->hdr->code - 1];
+src/net.c:    response = coap_pdu_init(node->pdu->hdr->type == COAP_MESSAGE_CON 
+src/net.c:			     0, node->pdu->hdr->id, COAP_MAX_PDU_SIZE);
+src/net.c:    if (coap_add_token(response, node->pdu->hdr->token_length,
+src/net.c:		       node->pdu->hdr->token)) {
+src/net.c:      str token = { node->pdu->hdr->token_length, node->pdu->hdr->token };
+src/net.c:	  debug("cannot send response for message %d\n", node->pdu->hdr->id);
+src/net.c:			   rcvd->pdu->hdr->token, 
+src/net.c:			   rcvd->pdu->hdr->token_length);
+src/net.c:    /* if ( rcvd->pdu->hdr->version != COAP_DEFAULT_VERSION ) { */
+src/net.c:    /*   debug("dropped packet with unknown version %u\n", rcvd->pdu->hdr->version); */
+src/net.c:    switch (rcvd->pdu->hdr->type) {
+src/net.c:      if (rcvd->pdu->hdr->code == 0)
+src/net.c:      if (sent && COAP_RESPONSE_CLASS(sent->pdu->hdr->code) == 2) {
+src/net.c:	  { sent->pdu->hdr->token_length, sent->pdu->hdr->token };
+src/net.c:      coap_log(LOG_ALERT, "got RST for message %u\n", ntohs(rcvd->pdu->hdr->id));
+src/net.c:      coap_log(LOG_ALERT, "got RST for message %u\n", uip_ntohs(rcvd->pdu->hdr->id));
+src/net.c:      if (COAP_MESSAGE_IS_REQUEST(rcvd->pdu->hdr))
+src/net.c:      else if (COAP_MESSAGE_IS_RESPONSE(rcvd->pdu->hdr))
+src/net.c:	      COAP_RESPONSE_CLASS(rcvd->pdu->hdr->code),
+src/net.c:	      rcvd->pdu->hdr->code & 0x1f);
+src/net.c:	while (nextpdu && nextpdu->t <= now) {
+src/net.c:		   nextpdu ? nextpdu->t - now : 0xFFFF);
+Binary file src/.libs/libcoap_1_la-option.o matches
+Binary file src/.libs/libcoap_1_la-pdu.o matches
+Binary file src/libcoap_1_la-option.o matches
+src/pdu.c:  pdu->hdr = pdu->pbuf->payload;
+src/pdu.c:  pdu->max_delta = 0;
+src/pdu.c:  pdu->data = NULL;
+src/pdu.c:  memset(pdu->hdr, 0, size);
+src/pdu.c:  pdu->max_size = size;
+src/pdu.c:  pdu->hdr->version = COAP_DEFAULT_VERSION;
+src/pdu.c:  pdu->length = sizeof(coap_hdr_t);
+src/pdu.c:  pdu->hdr = coap_malloc_type(COAP_PDU_BUF, size);
+src/pdu.c:  if (pdu->hdr == NULL) {
+src/pdu.c:    pdu->pbuf = p;
+src/pdu.c:    pdu->hdr->id = id;
+src/pdu.c:    pdu->hdr->type = type;
+src/pdu.c:    pdu->hdr->code = code;
+src/pdu.c:    if (pdu->hdr != NULL) {
+src/pdu.c:      coap_free_type(COAP_PDU_BUF, pdu->hdr);
+src/pdu.c:    pbuf_free(pdu->pbuf);
+src/pdu.c:  if (!pdu || len > 8 || pdu->max_size < HEADERLENGTH)
+src/pdu.c:  pdu->hdr->token_length = len;
+src/pdu.c:    memcpy(pdu->hdr->token, data, len);
+src/pdu.c:  pdu->max_delta = 0;
+src/pdu.c:  pdu->length = HEADERLENGTH;
+src/pdu.c:  pdu->data = NULL;
+src/pdu.c:  pdu->data = NULL;
+src/pdu.c:  if (type < pdu->max_delta) {
+src/pdu.c:  opt = (unsigned char *)pdu->hdr + pdu->length;
+src/pdu.c:  optsize = coap_opt_encode(opt, pdu->max_size - pdu->length, 
+src/pdu.c:			    type - pdu->max_delta, data, len);
+src/pdu.c:    pdu->max_delta = type;
+src/pdu.c:    pdu->length += optsize;
+src/pdu.c:  pdu->data = NULL;
+src/pdu.c:  if (type < pdu->max_delta) {
+src/pdu.c:  opt = (unsigned char *)pdu->hdr + pdu->length;
+src/pdu.c:  optsize = coap_opt_encode(opt, pdu->max_size - pdu->length,
+src/pdu.c:			    type - pdu->max_delta, NULL, len);
+src/pdu.c:    pdu->max_delta = type;
+src/pdu.c:    pdu->length += optsize;
+src/pdu.c:  assert(pdu->data == NULL);
+src/pdu.c:  if (pdu->length + len + 1 > pdu->max_size) {
+src/pdu.c:    assert(pdu->data == NULL);
+src/pdu.c:  pdu->data = (unsigned char *)pdu->hdr + pdu->length;
+src/pdu.c:  *pdu->data = COAP_PAYLOAD_START;
+src/pdu.c:  pdu->data++;
+src/pdu.c:  memcpy(pdu->data, data, len);
+src/pdu.c:  pdu->length += len + 1;
+src/pdu.c:  if (pdu->data) {
+src/pdu.c:    *len = (unsigned char *)pdu->hdr + pdu->length - pdu->data;
+src/pdu.c:    *data = pdu->data;
+src/pdu.c:  if (pdu->max_size < length) {
+src/pdu.c:  LWIP_ASSERT("coap_pdu_parse with unexpected addresses", data == (void*)pdu->hdr);
+src/pdu.c:  LWIP_ASSERT("coap_pdu_parse with unexpected length", length == pdu->length);
+src/pdu.c:  pdu->hdr->version = data[0] >> 6;
+src/pdu.c:  pdu->hdr->type = (data[0] >> 4) & 0x03;
+src/pdu.c:  pdu->hdr->token_length = data[0] & 0x0f;
+src/pdu.c:  pdu->hdr->code = data[1];
+src/pdu.c:  pdu->data = NULL;
+src/pdu.c:  if (pdu->hdr->code == 0) {
+src/pdu.c:    if (length != sizeof(coap_hdr_t) || pdu->hdr->token_length) {
+src/pdu.c:  if (length < sizeof(coap_hdr_t) + pdu->hdr->token_length
+src/pdu.c:      || pdu->hdr->token_length > 8) {
+src/pdu.c:  memcpy(&pdu->hdr->id, data + 2, 2);
+src/pdu.c:    memcpy(pdu->hdr + 1, data + sizeof(coap_hdr_t), length - sizeof(coap_hdr_t));
+src/pdu.c:  pdu->length = length;
+src/pdu.c:  length -= (pdu->hdr->token_length + sizeof(coap_hdr_t));
+src/pdu.c:  opt = (unsigned char *)(pdu->hdr + 1) + pdu->hdr->token_length;
+src/pdu.c:	  (unsigned char *)pdu->hdr + pdu->length);
+src/pdu.c:    pdu->data = (unsigned char *)opt;
+src/option.c:  if (pdu && pdu->hdr && 
+src/option.c:      (pdu->hdr->token + pdu->hdr->token_length 
+src/option.c:       < (unsigned char *)pdu->hdr + pdu->length)) {
+src/option.c:    coap_opt_t *opt = pdu->hdr->token + pdu->hdr->token_length;
+src/option.c:  assert(pdu->hdr);
+src/option.c:  oi->next_option = (unsigned char *)pdu->hdr + sizeof(coap_hdr_t)
+src/option.c:    + pdu->hdr->token_length;
+src/option.c:  if ((unsigned char *)pdu->hdr + pdu->length <= oi->next_option) {
+src/option.c:  assert((sizeof(coap_hdr_t) + pdu->hdr->token_length) <= pdu->length);
+src/option.c:  oi->length = pdu->length - (sizeof(coap_hdr_t) + pdu->hdr->token_length);
+Binary file src/libcoap_1_la-pdu.o matches
+src/block.c:  avail = pdu->max_size - pdu->length - 4;
+src/debug.c:	  pdu->hdr->version, msg_type_string(pdu->hdr->type),
+src/debug.c:	  msg_code_string(pdu->hdr->code), ntohs(pdu->hdr->id));
+src/debug.c:  for (i = 0; i < pdu->hdr->token_length; i++) {
+src/debug.c:    fprintf(COAP_DEBUG_FD, "%02x", pdu->hdr->token[i]);
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  pdu->hdr->id = htons(0x1234);
+tests/test_error_response.c:  CU_ASSERT(pdu->hdr->id == htons(0x1234));
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_NON;
+tests/test_error_response.c:  pdu->hdr->id = htons(0x1234);
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_error_response.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_error_response.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_CON);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == COAP_REQUEST_GET);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_NON);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 5);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0x69);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr->token, teststr + 4, 5) == 0);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_NON);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 5);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0x73);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr->token, teststr + 4, 5) == 0);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_NON);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 5);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0x73);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr->token, teststr + 4, 5) == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == (unsigned char *)pdu->hdr + 13);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->data, teststr + 13, 7) == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_NON);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0x73);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == (unsigned char *)pdu->hdr + 5);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->data, teststr + 5, 7) == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_ACK);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->version == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->type == COAP_MESSAGE_RST);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->token_length == 0);
+tests/test_pdu.c:  CU_ASSERT(pdu->hdr->code == 0);
+tests/test_pdu.c:  CU_ASSERT(memcmp(&pdu->hdr->id, teststr + 2, 2) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_pdu.c:  pdu->hdr->code = COAP_REQUEST_GET;
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  size_t old_max = pdu->max_size;
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_pdu.c:  pdu->hdr->code = COAP_REQUEST_GET;
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_ACK;
+tests/test_pdu.c:  pdu->hdr->code = 0x99;
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 3);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 24);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 11);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 29);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 11);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 30);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 8000);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 41);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_ACK;
+tests/test_pdu.c:  pdu->hdr->code = COAP_RESPONSE_CODE(404);
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 12);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 1);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 21);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 17);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 24);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_NON;
+tests/test_pdu.c:  pdu->hdr->code = COAP_REQUEST_POST;
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_pdu.c:  pdu->hdr->code = COAP_RESPONSE_CODE(203);
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_CON;
+tests/test_pdu.c:  pdu->hdr->code = COAP_RESPONSE_CODE(203);
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 8);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == (unsigned char *)pdu->hdr + 7);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_ACK;
+tests/test_pdu.c:  pdu->hdr->code = COAP_RESPONSE_CODE(204);
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 13);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 5);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 14);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 35);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 34);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 39);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == (unsigned char *)pdu->hdr + 35);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_pdu.c:  pdu->hdr->type = COAP_MESSAGE_ACK;
+tests/test_pdu.c:  pdu->hdr->code = COAP_RESPONSE_CODE(204);
+tests/test_pdu.c:  pdu->hdr->id = htons(0x1234);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 4);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 8);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 263);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 8);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 279);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->max_delta == 20);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 281);
+tests/test_pdu.c:  CU_ASSERT_PTR_NULL(pdu->data);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == 286);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == (unsigned char *)pdu->hdr + 282);
+tests/test_pdu.c:  CU_ASSERT(pdu->length == sizeof(teststr));
+tests/test_pdu.c:  CU_ASSERT(memcmp(pdu->hdr, teststr, sizeof(teststr)) == 0);
+tests/test_pdu.c:  size_t old_max = pdu->max_size;
+tests/test_pdu.c:  CU_ASSERT(pdu->data == NULL);
+tests/test_pdu.c:  CU_ASSERT(pdu->data == NULL);
+tests/test_pdu.c:  pdu->max_size = old_max;
+tests/test_wellknown.c:    coap_pdu_clear(pdu, pdu->max_size);	/* clear PDU */
+tests/test_wellknown.c:    pdu->hdr->type = COAP_MESSAGE_NON;
+tests/test_wellknown.c:    pdu->hdr->code = COAP_REQUEST_GET;
+tests/test_wellknown.c:    pdu->hdr->id = htons(0x1234);
+TODO:-> Adding additional config options (like --with-pdu-size)
